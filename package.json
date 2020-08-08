@@ -1,0 +1,28 @@
+{
+  "name": "captchabot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustAPieOP/CaptchaBot.git"
+  },
+  "author": "JustAPie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustAPieOP/CaptchaBot/issues"
+  },
+  "homepage": "https://github.com/JustAPieOP/CaptchaBot#readme",
+  "dependencies": {
+    "@haileybot/captcha-generator": "github:haileybot/captcha-generator",
+    "@types/node": "^14.0.27",
+    "ascii-table": "0.0.9",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.9.28"
+  }
+}
