@@ -8,10 +8,11 @@ module.exports = {
     usage: "(command)",
     async execute(client, message, args, settings) {
         const channel = message.guild.channels.cache.get(settings.VerifyChannel);
-        if (!channel||message.channel.id !== channel) return;
+        if (!channel || message.channel.id !== channel.id) return;
         const role = message.guild.roles.cache.get(settings.GiveRole);
+        const authorUser = message.guild.members.cache.get(message.author.id);
         if (!role) return;
-        if (message.author.roles.cache.some(r => r.id === role.id)) {
+        if (authorUser.roles.cache.some(r => r.id === role.id)) {
             let embed = new MessageEmbed()
             .setColor("#ff000")
             .setDescription("Verification failed! You have already been verified!");
@@ -40,7 +41,7 @@ module.exports = {
                 .setColor("#ffff00")
                 .setDescription("🎉 Verification completed! You are now having access to the server");
                 message.channel.send(embed);
-                return message.author.roles.add(role, "Verified");
+                return authorUser.roles.add(role, "Verified");
             } else {
                 let embed = new MessageEmbed()
                 .setColor("#ff0000")
