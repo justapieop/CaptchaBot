@@ -30,7 +30,7 @@ module.exports = {
         
         const dmc = await message.author.createDM();
         await dmc.send(embed)
-        .then(async mess => {
+        .then(async () => {
             const embed = new MessageEmbed()
             .setColor("#1ef000")
             .setDescription("Verification code sent! Please check your DM");
@@ -40,18 +40,20 @@ module.exports = {
             const collector = await dmc.createMessageCollector(filter);
 
             collector.on("collect", async function (m) {
-                mess.delete();
-                if (m.content.toUpperCase() === captcha.value) {
+                setTimeout(async () => {
+                    await message.author.deleteDM();
+                }, 5000);
+                if (m.content.toUpperCase() == captcha.value) {
                     let embed = new MessageEmbed()
                     .setColor("#ffff00")
                     .setDescription("🎉 Verification completed! You are now having access to the server");
                     await dmc.send(embed);
                     return authorUser.roles.add(role, "Verified");
-                } else {
+                } else if (m.content.toUpperCase() != captcha.value) {
                     let embed = new MessageEmbed()
                     .setColor("#ff0000")
-                    .setDescription("🎉 Verification failed! Please try again!");
-                    return message.channel.send(embed);
+                    .setDescription("🎉 Verification failed! Please get another code and try again!");
+                    return dmc.send(embed);
                 }
             });
         })
