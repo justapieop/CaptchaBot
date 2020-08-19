@@ -5,6 +5,7 @@ module.exports = {
     description: "Sets the channel which will be prompted for new members to verify",
     usage: "(command) [channel name/channel id]",
     category: "Configuration",
+    perms: "ADMINISTRATOR",
     async execute(client, message, args, settings) {
         if (!args.length) {
             const channel = message.guild.channels.cache.find(r => r.id === settings.VerifyChannel);

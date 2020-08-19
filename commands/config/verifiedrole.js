@@ -5,6 +5,7 @@ module.exports = {
     description: "Sets the role which will be given to the verified member",
     usage: "(command) [role name/role id]",
     category: "Configuration",
+    perms: "ADMINISTRATOR",
     async execute(client, message, args, settings) {
         if (!args.length) {
             const role = message.guild.roles.cache.find(r => r.id === settings.GiveRole);

@@ -12,6 +12,25 @@ module.exports = async (client, message) => {
     if (cmd.length === 0) return;
     let command = client.commands.get(cmd);
     if (!command) client = client.commands.get(client.aliases.get(cmd));
+    if (command.perms) {
+        if (!message.member.hasPermission(command.perms)) {
+            let embed = new MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("An Error Occurred")
+            .setDescription(`Missing required permission(s): \`${command.perms}\``)
+            .setFooter("&& - And. || - Or");
+            return message.channel.send(embed);
+        }
+
+        if (!message.guild.me.hasPermission(command.perms)) {
+            let embed = new MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("An Error Occurred")
+            .setDescription(`The bot's missing required permission(s): \`${command.perms}\``)
+            .setFooter("&& - And. || - Or");
+            return message.channel.send(embed);
+        }
+    }
     if (command) {
         try {
             await command.execute(client, message, args, settings);
