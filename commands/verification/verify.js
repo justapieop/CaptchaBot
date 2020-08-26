@@ -6,6 +6,7 @@ module.exports = {
     description: "Verifies a member",
     category: "Verification",
     usage: "(command)",
+    perms: "SEND_MESSAGES",
     async execute(client, message, args, settings) {
         const channel = message.guild.channels.cache.get(settings.VerifyChannel);
         if (!channel || message.channel.id !== channel.id) return;
