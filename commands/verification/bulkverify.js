@@ -4,10 +4,10 @@ module.exports = {
     name: "bulkverify",
     description: "Bulk verify all members in guild",
     category: "Verification",
-    usage: "(command)",
+    usage: "(command) (human/all)",
     perms: "ADMINISTRATOR",
     async execute(client, message, args, settings) {
-        if ((!args.length) || args[0] !== "human" || "all") {
+        if ((!args.length) || args[0] !== "human" || args[0] !== "all") {
             let embed = new MessageEmbed()
             .setColor("#ff0000")
             .setTitle("User input required")
